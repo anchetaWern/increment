@@ -1,11 +1,25 @@
 import React from 'react';
 import { View, Text, TouchableHighlight, Image, StyleSheet } from 'react-native';
 
+import IconButton from '../components/IconButton';
 import List from '../components/List';
 
 import progress_data from '../data/progress';
 
 export default class Progress extends React.Component {
+
+  static navigationOptions = {
+    headerTitle: 'Progress',
+    headerRight: (
+      <IconButton size={25} color="#FFF" />
+    ),
+    headerStyle: {
+      backgroundColor: '#333'
+    },
+    headerTitleStyle: {
+      color: '#FFF'
+    }
+  };
 
   render() {
     return (
@@ -33,6 +47,9 @@ export default class Progress extends React.Component {
 }
 
 const styles = StyleSheet.create({
+  body: {
+    flex: 1
+  },
   list_item: {
     padding: 20
   },

@@ -1,6 +1,8 @@
 import React from 'react';
 import { StyleSheet, View } from 'react-native';
 
+
+
 import IconButton from './app/components/IconButton';
 import Screen from './app/components/Screen';
 
@@ -11,6 +13,8 @@ import CreateExercisePage from './app/screens/CreateExercise';
 import LogsPage from './app/screens/Logs';
 import LogWorkoutPage from './app/screens/LogWorkout';
 import ProgressPage from './app/screens/Progress';
+
+import Root from './Root';
 
 const pages = {
   routines: {
@@ -45,22 +49,14 @@ const pages = {
   }
 };
 
-var current_page = pages.progress;
+var current_page = pages.routines;
 
 export default class App extends React.Component {
 
   render() {
     return (
       <View style={styles.container}>
-        <Screen
-          page={current_page.component}
-          title={current_page.title}
-          has_header_button={current_page.has_header_button} />
-          <View style={styles.tabs_container}>
-          <IconButton icon="event-note" />
-          <IconButton icon="edit" />
-          <IconButton icon="camera-alt" />
-        </View>
+        <Root />
       </View>
     );
   }

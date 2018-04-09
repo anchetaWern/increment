@@ -4,17 +4,30 @@ import styles from './styles';
 
 const List = (props) => {
 
+  if(props.data.length > 1){
+    return (
+      <View style={styles.list}>
+        <FlatList
+          key={props.data.length}
+          numColumns={props.data.length}
+          columnWrapperStyle={styles.wrapper}
+          data={props.data}
+          renderItem={props.renderItem}
+        />
+      </View>
+    );
+  }
+
   return (
     <View style={styles.list}>
       <FlatList
+        key={props.data.length}
         numColumns={props.data.length}
-        columnWrapperStyle={styles.wrapper}
         data={props.data}
         renderItem={props.renderItem}
       />
     </View>
   );
-
 
 }
 
