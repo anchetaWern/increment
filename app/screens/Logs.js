@@ -35,46 +35,35 @@ export default class Logs extends React.Component {
 
   componentDidMount() {
     let dates = lastWeeksDates();
-
-    function getExercises(date) {
-      return new Promise((resolve, reject) => {
-        store.get(date + '_exercises')
-          .then((response) => {
-            let workout_data = response;
-            if(response){
-              workout_data.date = date;
-            }
-            resolve(workout_data);
-          });
-      });
-    }
-
-    let promises = [];
-    dates.forEach((date) => {
-      promises.push(getExercises(date));
+    let keys = dates.map((date) => {
+      return date + '_exercises';
     });
 
     let logs_data = [];
-    Promise.all(promises)
+
+    store.get(keys)
       .then((response) => {
 
-        response.forEach((workout_session) => {
+        response.forEach((workout_session, index) => {
+          let date = dates[index];
+
           if(workout_session){
             let exercises = [];
             workout_session.forEach((item) => {
               exercises.push(item.exercise_name);
             });
 
-            let d = new Date(workout_session.date);
+            let d = new Date(date);
+
             let month = d.toLocaleString('en-us', {month: 'short'});
             let day = d.getDate();
 
             logs_data.push({
               key: uniqid(),
-              date: workout_session.date,
+              date: date,
               month: month,
               day: day,
-              exercises: exercises.join(', ') + '...'
+              exercises: exercises.splice(0, 3).join(', ') + '...'
             });
 
           }
@@ -83,8 +72,8 @@ export default class Logs extends React.Component {
         this.setState({
           logs_data: logs_data
         });
-      });
 
+      });
   }
 
 

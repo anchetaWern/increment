@@ -43,58 +43,25 @@ export default class LogWorkout extends React.Component {
 
 
   componentDidMount() {
-    let exercises = [];
-    let workouts = [];
-    let sets = [];
-
-    let promises = [];
-
-    function getExercises() {
-      return new Promise((resolve, reject) => {
-
-        store.get('exercises')
-          .then((response) => {
-            exercises = (response) ? response : [];
-            resolve(exercises);
-          });
-
-      });
-    }
-
 
     let date = this.props.navigation.state.params.date;
 
-    function getWorkouts() {
-      return new Promise((resolve, reject) => {
-        store.get(date + '_exercises')
-          .then((response) => {
-            workouts = (response) ? response : [];
-            resolve(workouts);
-          });
-      });
-    }
-
-
-    function getSets() {
-      return new Promise((resolve, reject) => {
-        store.get(date + '_sets')
-          .then((response) => {
-            sets = (response) ? response : [];
-            resolve(sets);
-          });
-      });
-    }
-
-    promises = [getExercises(), getWorkouts(), getSets()];
-
-    Promise.all(promises)
+    let keys = ['exercises', date + '_exercises', date + '_sets'];
+    store.get(keys)
       .then((response) => {
+
+        let exercises_data = (response[0]) ? response[0] : [];
+        let selected_exercise = (response[0]) ? response[0][0].id : '';
+        let workouts_data = (response[1]) ? response[1] : [];
+        let sets_data = (response[2]) ? response[2] : [];
+
         this.setState({
-          exercises_data: response[0],
-          selected_exercise: response[0].id,
-          workouts_data: response[1],
-          sets_data: response[2]
+          exercises_data,
+          selected_exercise,
+          workouts_data,
+          sets_data
         });
+
       });
 
     this.props.navigation.setParams({
