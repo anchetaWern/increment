@@ -1,9 +1,5 @@
 import React from 'react';
-import { View, FlatList, TouchableHighlight, Text } from 'react-native';
-import store from 'react-native-simple-store';
-
-import IconButton from '../components/IconButton';
-import AlertBox from '../components/AlertBox';
+import { FlatList, TouchableHighlight, Text } from 'react-native';
 
 import routines_data from '../data/routines';
 
@@ -21,10 +17,6 @@ export default class Routines extends React.Component {
     }
   });
 
-  constructor(props) {
-    super(props);
-    this.renderItem = this.renderItem.bind(this);
-  }
 
 	render() {
 		return (
@@ -32,7 +24,8 @@ export default class Routines extends React.Component {
 		);
 	}
 
-  renderItem({item}) {
+
+  renderItem = ({item}) => {
     const { navigate } = this.props.navigation;
     return (
       <TouchableHighlight key={item.key} underlayColor="#ccc" onPress={() => {

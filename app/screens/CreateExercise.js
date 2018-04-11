@@ -20,7 +20,7 @@ export default class CreateExercise extends React.Component {
 
   state = {
     name: '',
-    muscle_grp: this.props.navigation.state.params.key,
+    routine: this.props.navigation.state.params.key,
     sets: '3',
     exercises: []
   };
@@ -58,8 +58,8 @@ export default class CreateExercise extends React.Component {
             style={styles.picker}
             itemStyle={styles.picker_items}
             mode="dropdown"
-            selectedValue={this.state.muscle_grp}
-            onValueChange={(itemValue, itemIndex) => this.setState({muscle_grp: itemValue})}
+            selectedValue={this.state.routine}
+            onValueChange={(itemValue, itemIndex) => this.setState({routine: itemValue})}
             >
             {renderPickerItems(routines_data)}
           </Picker>
@@ -97,7 +97,7 @@ export default class CreateExercise extends React.Component {
     let new_exercise = {
       'id': id,
       'name': this.state.name,
-      'muscle_grp': this.state.muscle_grp,
+      'routine': this.state.routine,
       'sets': this.state.sets
     };
 

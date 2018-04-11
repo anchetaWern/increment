@@ -17,8 +17,8 @@ export default class Exercises extends React.Component {
       headerRight: (
         <IconButton size={25} color="#FFF" onPress={() => {
           navigation.navigate('CreateExercise', {
-            'key': navigation.state.params.key,
-            'name': navigation.state.params.name,
+            'key': params.key,
+            'name': params.name,
             'updateExercises': params.updateExercises
           });
         }} />
@@ -44,7 +44,8 @@ export default class Exercises extends React.Component {
   }
 
 
-  componentWillMount() {
+  componentDidMount() {
+
     store.get('exercises')
       .then((response) => {
         if(response){
@@ -53,10 +54,7 @@ export default class Exercises extends React.Component {
           });
         }
       });
-  }
 
-
-  componentDidMount() {
     this.props.navigation.setParams({
       'updateExercises': this.updateExercises
     });
@@ -65,10 +63,10 @@ export default class Exercises extends React.Component {
 
   render() {
     const { params } = this.props.navigation.state;
-    let muscle_grp = params.key;
+    let routine = params.key;
 
     let exercises = this.state.exercises_data.filter((item) => {
-      return item.muscle_grp == muscle_grp;
+      return item.routine == routine;
     });
 
     return (
