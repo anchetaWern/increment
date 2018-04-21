@@ -25,7 +25,7 @@ cd increment
 Switch to the latest part:
 
 ```
-git checkout part2
+git checkout part3
 ```
 
 Install all the dependencies:
