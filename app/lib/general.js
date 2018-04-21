@@ -3,13 +3,13 @@ import { Text, TouchableHighlight, Picker } from 'react-native';
 import styles from './styles';
 
 function renderItem({item}) {
-    return (
-      <TouchableHighlight underlayColor="#ccc" onPress={() => {
-        console.log('pressed!');
-      }} style={styles.list_item}>
-        <Text key={item.key}>{item.name}</Text>
-      </TouchableHighlight>
-    );
+  return (
+    <TouchableHighlight underlayColor="#ccc" onPress={() => {
+      console.log('pressed!');
+    }} style={styles.list_item}>
+      <Text key={item.key}>{item.name}</Text>
+    </TouchableHighlight>
+  );
 }
 
 function renderPickerItems(data) {
@@ -32,6 +32,11 @@ function getDate() {
   return date;
 }
 
+function getPathSafeDatetime() {
+  let datetime = new Date().toLocaleString().replace(/\//g, '-').replace(',', '').replace(/:/g, '_').replace(/ /g, '+');
+  return datetime;
+}
+
 function lastWeeksDates () {
   let dates = [];
   for(let i = 0; i < 7; i++){
@@ -45,4 +50,10 @@ function lastWeeksDates () {
   return dates;
 }
 
-export { renderItem, renderPickerItems, uniqid, getDate, lastWeeksDates };
+function friendlyDate(str) {
+  let friendly_date = str.replace(/-/g, '/').replace(/\+/g, ' ').replace(/_/g, ':');
+  return friendly_date.substr(0, friendly_date.lastIndexOf(':')) + friendly_date.substr(friendly_date.lastIndexOf(' '));
+}
+
+
+export { renderItem, renderPickerItems, uniqid, getDate, lastWeeksDates, getPathSafeDatetime, friendlyDate };
