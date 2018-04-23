@@ -81,8 +81,10 @@ export default TabNavigator(
         return <MaterialIcons name={iconName} size={35} color={color} />;
       },
     }),
+    tabBarPosition: 'bottom',
     animationEnabled: true,
     tabBarOptions: {
+      showIcon: true,
       showLabel: false,
       style: {
         backgroundColor: '#333'
