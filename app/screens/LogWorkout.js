@@ -32,7 +32,6 @@ export default class LogWorkout extends React.Component {
                 <Button
                   style={styles.button}
                   title="Add"
-                  color="#FFF"
                   onPress={() => {
                     console.log('pressed!');
                   }}
@@ -62,7 +61,6 @@ export default class LogWorkout extends React.Component {
               <Button
                 style={styles.button}
                 title="Add"
-                color="#FFF"
                 onPress={() => {
                   console.log('pressed!');
                 }}
@@ -143,8 +141,6 @@ const styles = StyleSheet.create({
     padding: 10
   },
   button_container: {
-    marginTop: 30,
-    padding: 10,
-    backgroundColor: '#05A5D1'
+    marginTop: 30
   }
 });
