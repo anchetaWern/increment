@@ -44,7 +44,6 @@ export default class CreateExercise extends React.Component {
           <Button
             style={styles.button}
             title="Save"
-            color="#FFF"
             onPress={() => {
               console.log('pressed!');
             }}
@@ -84,8 +83,6 @@ const styles = StyleSheet.create({
     fontSize: 15
   },
   button_container: {
-    marginTop: 30,
-    padding: 10,
-    backgroundColor: '#05A5D1'
+    marginTop: 30
   }
 });
