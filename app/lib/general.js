@@ -12,6 +12,23 @@ function renderItem({item}) {
     );
 }
 
+function getLocalDateTime(date) {
+
+  let hours = date.getHours();
+  if (hours < 10) hours = '0' + hours;
+
+  let minutes = date.getMinutes();
+  if (minutes < 10) minutes = '0' + minutes;
+
+  return date.getMonth() + '/' + date.getDate() + '/' +
+         date.getFullYear() + ', ' + hours + ':' + minutes;
+}
+
+function getShortMonth(month_number) {
+  let months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul","Aug", "Sep", "Oct", "Nov", "Dec"];
+  return months[month_number + 1];
+}
+
 function renderPickerItems(data) {
   return data.map((item) => {
     let val = item.name.toLowerCase();
@@ -27,7 +44,7 @@ function uniqid() {
 }
 
 function getDate() {
-  let datetime = new Date().toLocaleString();
+  let datetime = getLocalDateTime(new Date());
   let date = datetime.substr(0, datetime.lastIndexOf(','));
   return date;
 }
@@ -37,7 +54,7 @@ function lastWeeksDates () {
   for(let i = 0; i < 7; i++){
       let d = new Date();
       d.setDate(d.getDate() - i);
-      let datetime = d.toLocaleString();
+      let datetime = getLocalDateTime(d);
       let formatted_date = datetime.substr(0, datetime.lastIndexOf(','));
       dates.push(formatted_date);
   }
