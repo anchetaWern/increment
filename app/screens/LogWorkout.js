@@ -228,19 +228,19 @@ export default class LogWorkout extends React.Component {
 
   renderItem = ({item}) => {
     return (
-      <View key={item.key}>
+      <View key={item.key} listKey={item.key}>
         <View style={styles.list_item_header}>
           <Text style={styles.list_item_header_text}>{item.exercise_name} ({item.exercise_sets})</Text>
           <IconButton icon="add" size={20} color="#333" onPress={() => this.showAddSetModal(item.exercise_id)} />
         </View>
-        {this.renderSets(item.exercise_id)}
+        {this.renderSets(item.exercise_id, item.key)}
       </View>
     );
   }
 
 
-  renderSets(exercise_id) {
-
+  renderSets(exercise_id, key) {
+    let l_key = exercise_id + ":" + key + ":" + uniqid();
     let sets_data = this.state.sets_data;
     let sets = sets_data.filter((item) => {
       return item.exercise_id == exercise_id;
@@ -249,7 +249,7 @@ export default class LogWorkout extends React.Component {
     if(sets.length){
       return (
         <ScrollView horizontal={true} contentContainerStyle={styles.content_container}>
-          <List data={sets} renderItem={({ item }) => {
+          <List data={sets} listKey={l_key} renderItem={({ item }) => {
             return (
               <SetContainer key={item.key} weight={item.weight} reps={item.reps} onPress={() => this.incrementSet(item)} />
             );
