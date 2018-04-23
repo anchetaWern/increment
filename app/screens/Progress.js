@@ -152,7 +152,7 @@ export default class Progress extends React.Component {
           visible={this.state.is_camera_visible}
           onRequestClose={() => {
             this.setState({
-              is_photo_visible: false
+              is_camera_visible: false
             });
           }}>
           <View style={styles.modal}>
