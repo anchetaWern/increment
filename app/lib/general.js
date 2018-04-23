@@ -62,4 +62,4 @@ function lastWeeksDates () {
   return dates;
 }
 
-export { renderItem, renderPickerItems, uniqid, getDate, lastWeeksDates };
+export { renderItem, renderPickerItems, uniqid, getDate, lastWeeksDates, getShortMonth };
