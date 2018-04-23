@@ -17,7 +17,10 @@ export default class LogWorkout extends React.Component {
       <View>
         <Modal
           animationType="slide"
-          visible={false}>
+          visible={false}
+          onRequestClose={() => {
+            console.log('request close');
+          }}>
             <View style={styles.modal_header}>
               <Text style={styles.modal_header_text}>Add Exercise</Text>
               <IconButton icon="close" color="#FFF" size={18} />
@@ -43,7 +46,10 @@ export default class LogWorkout extends React.Component {
 
         <Modal
           animationType="slide"
-          visible={false}>
+          visible={false}
+          onRequestClose={() => {
+            console.log('request close');
+          }}>
           <View style={styles.modal_header}>
             <Text style={styles.modal_header_text}>Add Set</Text>
             <IconButton icon="close" color="#FFF" size={18} />
