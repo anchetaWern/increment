@@ -7,7 +7,7 @@ import AlertBox from '../components/AlertBox';
 
 import list_styles from '../components/List/styles';
 
-import { getDate, lastWeeksDates, uniqid } from '../lib/general';
+import { getDate, lastWeeksDates, uniqid, getShortMonth } from '../lib/general';
 
 export default class Logs extends React.Component {
 
@@ -35,6 +35,7 @@ export default class Logs extends React.Component {
 
   componentDidMount() {
     let dates = lastWeeksDates();
+
     let keys = dates.map((date) => {
       return date + '_exercises';
     });
@@ -55,7 +56,7 @@ export default class Logs extends React.Component {
 
             let d = new Date(date);
 
-            let month = d.toLocaleString('en-us', {month: 'short'});
+            let month = getShortMonth(d.getMonth());
             let day = d.getDate();
 
             logs_data.push({
