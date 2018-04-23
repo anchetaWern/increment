@@ -137,7 +137,12 @@ export default class LogWorkout extends React.Component {
       <View>
         <Modal
           animationType="slide"
-          visible={this.state.add_exercise_visible}>
+          visible={this.state.add_exercise_visible}
+          onRequestClose={() => {
+            this.setState({
+              add_exercise_visible: false
+            });
+          }}>
             <View style={styles.modal_header}>
               <Text style={styles.modal_header_text}>Add Exercise</Text>
               <IconButton icon="close" color="#FFF" size={18} onPress={() => {
@@ -159,7 +164,6 @@ export default class LogWorkout extends React.Component {
                 <Button
                   style={styles.button}
                   title="Add"
-                  color="#FFF"
                   onPress={this.addExercise}
                 />
               </View>
@@ -169,7 +173,12 @@ export default class LogWorkout extends React.Component {
 
         <Modal
           animationType="slide"
-          visible={this.state.add_set_visible}>
+          visible={this.state.add_set_visible}
+          onRequestClose={() => {
+            this.setState({
+              add_set_visible: false
+            });
+          }}>
           <View style={styles.modal_header}>
             <Text style={styles.modal_header_text}>Add Set</Text>
             <IconButton icon="close" color="#FFF" size={18} onPress={() => {
@@ -193,7 +202,6 @@ export default class LogWorkout extends React.Component {
               <Button
                 style={styles.button}
                 title="Add"
-                color="#FFF"
                 onPress={this.addSet}
               />
             </View>
@@ -316,7 +324,6 @@ const styles = StyleSheet.create({
   },
   button_container: {
     marginTop: 30,
-    padding: 10,
-    backgroundColor: '#05A5D1'
+    padding: 10
   }
 });
