@@ -27,6 +27,7 @@ export default class CreateExercise extends React.Component {
 
 
   componentDidMount() {
+
     store.get('exercises')
       .then((response) => {
         if(response){
@@ -35,6 +36,7 @@ export default class CreateExercise extends React.Component {
           });
         }
       });
+
   }
 
 
@@ -81,7 +83,6 @@ export default class CreateExercise extends React.Component {
           <Button
             style={styles.button}
             title="Save"
-            color="#FFF"
             onPress={this.saveExercise}
           />
         </View>
@@ -154,7 +155,6 @@ const styles = StyleSheet.create({
   },
   button_container: {
     marginTop: 30,
-    padding: 10,
-    backgroundColor: '#05A5D1'
+    padding: 10
   }
 });
