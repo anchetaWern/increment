@@ -70,7 +70,6 @@ export default class Progress extends React.Component {
           });
         }
       });
-
   }
 
 
@@ -152,7 +151,9 @@ export default class Progress extends React.Component {
           transparent={false}
           visible={this.state.is_camera_visible}
           onRequestClose={() => {
-
+            this.setState({
+              is_photo_visible: false
+            });
           }}>
           <View style={styles.modal}>
             {
@@ -185,7 +186,9 @@ export default class Progress extends React.Component {
           transparent={false}
           visible={this.state.is_photo_visible}
           onRequestClose={() => {
-
+            this.setState({
+              is_photo_visible: false
+            });
           }}>
           <View style={styles.modal}>
             {
