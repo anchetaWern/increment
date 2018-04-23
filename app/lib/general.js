@@ -20,13 +20,14 @@ function getLocalDateTime(date) {
   let minutes = date.getMinutes();
   if (minutes < 10) minutes = '0' + minutes;
 
-  return date.getMonth() + '/' + date.getDate() + '/' +
+  let month = date.getMonth() + 1;
+  return month + '/' + date.getDate() + '/' +
          date.getFullYear() + ', ' + hours + ':' + minutes;
 }
 
 function getShortMonth(month_number) {
   let months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul","Aug", "Sep", "Oct", "Nov", "Dec"];
-  return months[month_number + 1];
+  return months[month_number];
 }
 
 function renderPickerItems(data) {
