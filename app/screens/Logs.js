@@ -7,7 +7,7 @@ import AlertBox from '../components/AlertBox';
 
 import list_styles from '../components/List/styles';
 
-import { getDate, lastWeeksDates, uniqid } from '../lib/general';
+import { getDate, lastWeeksDates, uniqid, getShortMonth } from '../lib/general';
 
 export default class Logs extends React.Component {
 
