@@ -9,6 +9,7 @@ const List = (props) => {
       <View style={styles.list}>
         <FlatList
           key={props.data.length}
+          listKey={props.listKey}
           numColumns={props.data.length}
           columnWrapperStyle={styles.wrapper}
           data={props.data}

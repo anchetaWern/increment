@@ -16,7 +16,7 @@ export default class LogWorkout extends React.Component {
     const { params } = navigation.state;
 
     return {
-      headerTitle: 'Log Workout',
+      headerTitle: `Log Workout`,
       headerRight: (
         <IconButton size={25} color="#FFF" onPress={() => params.showAddExerciseModal() } />
       ),
@@ -47,6 +47,7 @@ export default class LogWorkout extends React.Component {
     let date = this.props.navigation.state.params.date;
 
     let keys = ['exercises', date + '_exercises', date + '_sets'];
+
     store.get(keys)
       .then((response) => {
 
@@ -63,6 +64,7 @@ export default class LogWorkout extends React.Component {
         });
 
       });
+
 
     this.props.navigation.setParams({
       showAddExerciseModal: this.showAddExerciseModal
@@ -137,7 +139,12 @@ export default class LogWorkout extends React.Component {
       <View>
         <Modal
           animationType="slide"
-          visible={this.state.add_exercise_visible}>
+          visible={this.state.add_exercise_visible}
+          onRequestClose={() => {
+            this.setState({
+              add_exercise_visible: false
+            });
+          }}>
             <View style={styles.modal_header}>
               <Text style={styles.modal_header_text}>Add Exercise</Text>
               <IconButton icon="close" color="#FFF" size={18} onPress={() => {
@@ -159,7 +166,6 @@ export default class LogWorkout extends React.Component {
                 <Button
                   style={styles.button}
                   title="Add"
-                  color="#FFF"
                   onPress={this.addExercise}
                 />
               </View>
@@ -169,7 +175,12 @@ export default class LogWorkout extends React.Component {
 
         <Modal
           animationType="slide"
-          visible={this.state.add_set_visible}>
+          visible={this.state.add_set_visible}
+          onRequestClose={() => {
+            this.setState({
+              add_set_visible: false
+            });
+          }}>
           <View style={styles.modal_header}>
             <Text style={styles.modal_header_text}>Add Set</Text>
             <IconButton icon="close" color="#FFF" size={18} onPress={() => {
@@ -193,7 +204,6 @@ export default class LogWorkout extends React.Component {
               <Button
                 style={styles.button}
                 title="Add"
-                color="#FFF"
                 onPress={this.addSet}
               />
             </View>
@@ -220,18 +230,20 @@ export default class LogWorkout extends React.Component {
 
   renderItem = ({item}) => {
     return (
-      <View key={item.key}>
+      <View key={item.key} listKey={item.key}>
         <View style={styles.list_item_header}>
           <Text style={styles.list_item_header_text}>{item.exercise_name} ({item.exercise_sets})</Text>
           <IconButton icon="add" size={20} color="#333" onPress={() => this.showAddSetModal(item.exercise_id)} />
         </View>
-        {this.renderSets(item.exercise_id)}
+        {this.renderSets(item.exercise_id, item.key)}
       </View>
     );
   }
 
 
-  renderSets(exercise_id) {
+  renderSets(exercise_id, key) {
+
+    let l_key = exercise_id + ":" + key + ":" + uniqid();
 
     let sets_data = this.state.sets_data;
     let sets = sets_data.filter((item) => {
@@ -241,7 +253,7 @@ export default class LogWorkout extends React.Component {
     if(sets.length){
       return (
         <ScrollView horizontal={true} contentContainerStyle={styles.content_container}>
-          <List data={sets} renderItem={({ item }) => {
+          <List data={sets} listKey={l_key} renderItem={({ item }) => {
             return (
               <SetContainer key={item.key} weight={item.weight} reps={item.reps} onPress={() => this.incrementSet(item)} />
             );
@@ -316,7 +328,6 @@ const styles = StyleSheet.create({
   },
   button_container: {
     marginTop: 30,
-    padding: 10,
-    backgroundColor: '#05A5D1'
+    padding: 10
   }
 });
